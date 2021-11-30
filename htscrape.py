@@ -16,17 +16,21 @@ wait = WebDriverWait(driver,5)
 all = driver.find_element_by_xpath('/html/body/form/section/div/div[2]/div/div[1]/table/tbody/tr[2]/td[1]/select/option[6]')
 all.click()
 
-waitagain = WebDriverWait(driver,5)
+waitagain = WebDriverWait(driver,15)
 
-#content = driver.find_elements_by_css_selector('#ContentPlaceHolder1_GridView1 > tbody:nth-child(1) > tr')
+
+driver.execute_script("window.scrollTo(0,15500)")
+
+content = driver.find_element_by_xpath('/html/body/form/section/div/div[2]/div/div[4]/div')
+inner = content.get_attribute('innerHTML')
+
 #for i in content:
 #    print(i.text)
 
-all_tables = pd.read_html(driver.page_source,attrs={'id':'ContentPlaceHolder1_GridView1'})
-df = all_tables[0]
-print(df)
+with open('test.html',"w") as f:
+    f.write(inner)
 
-
+print('done')
 
 
 
